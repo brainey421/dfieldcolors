@@ -2,13 +2,21 @@ function [r, g, b] = getcolor(mag, mag_min, mag_max)
 
 % getcolor(mag, mag_min, mag_max)
 % 
-% Finds the color for a vector on the colored direction field.
+% Finds the color for a vector on the colored direction field 
+% given the magnitude of the vector, the minimum magnitude of 
+% the vectors on the direction field, and the maximum magnitude 
+% of the vectors on the direction field. The largest magnitude 
+% corresponds to red, and the smallest magnitude corresponds to 
+% blue.
 
-% val is a number between 0 and 1, where
-% 0 is blue and 1 is red
+% val is a number between 0 and 1, where 0 is blue and 1 is red
 val = (mag - mag_min) / (mag_max - mag_min);
 
-if val < 0.25
+if isnan(val)
+    r = 0;
+    g = 0;
+    b = 1;
+elseif val < 0.25
     r = 0;
     g = 4 * val;
     b = 1;
